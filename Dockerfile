@@ -1,28 +1,28 @@
-# Stage 1: Build - Compile Java source code
-# Correct image name
-FROM eclipse-temurin:21-jdk-slim AS builder
+# Giai đoạn 1: Build - Biên dịch mã nguồn Java
+# Sử dụng JDK 24 để biên dịch, đảm bảo tương thích với mã nguồn của bạn
+FROM eclipse-temurin:24-jdk-slim AS builder
 
-# Set the working directory
+# Thiết lập thư mục làm việc bên trong container
 WORKDIR /app
 
-# Copy all project files into the container
+# Sao chép toàn bộ mã nguồn của bạn vào container
 COPY . .
 
-# Compile all Java files and place them in the correct directory
+# Biên dịch tất cả các file .java và đặt chúng vào đúng thư mục WEB-INF/classes
 RUN javac -d /app/src/main/webapp/WEB-INF/classes $(find /app/src/main/java -name "*.java")
 
-# Stage 2: Runtime - Run the application with Tomcat
-# Use the correct Tomcat image with a compatible JDK
+# Giai đoạn 2: Runtime - Chạy ứng dụng đã biên dịch
+# Sử dụng Tomcat 10.1 với JDK 21 (Đây là phiên bản tương thích Jakarta EE)
 FROM tomcat:10.1-jdk21-temurin
 
-# Remove default Tomcat webapps
+# Xóa các file mặc định trong webapps của Tomcat
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy your webapp content from the builder stage into Tomcat's webapps directory
+# Sao chép các file web (HTML, CSS, JSP) và các file .class đã biên dịch vào thư mục gốc của Tomcat
 COPY --from=builder /app/src/main/webapp /usr/local/tomcat/webapps/ROOT
 
-# Expose the port
+# Mở cổng mặc định của Tomcat
 EXPOSE 8080
 
-# Start Tomcat
+# Chạy Tomcat khi container khởi động
 CMD ["catalina.sh", "run"]
