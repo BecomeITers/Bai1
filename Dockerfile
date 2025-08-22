@@ -24,5 +24,10 @@ COPY --from=builder /app/src/main/webapp /usr/local/tomcat/webapps/ROOT
 # Mở cổng mặc định của Tomcat
 EXPOSE 8080
 
+<<<<<<< HEAD
 # Chạy Tomcat khi container khởi động
 CMD ["catalina.sh", "run"]
+=======
+# Start Tomcat
+CMD ["catalina.sh", "run"]
+>>>>>>> cdc2c63655c953d38598e18696f0f82d8af2aea8
