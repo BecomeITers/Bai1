@@ -1,5 +1,5 @@
 # Stage 1: Build - Compile Java source code
-# Use a JDK to compile your code
+# Correct image name
 FROM eclipse-temurin:21-jdk-slim AS builder
 
 # Set the working directory
@@ -12,7 +12,7 @@ COPY . .
 RUN javac -d /app/src/main/webapp/WEB-INF/classes $(find /app/src/main/java -name "*.java")
 
 # Stage 2: Runtime - Run the application with Tomcat
-# Use a Tomcat image with a compatible JDK
+# Use the correct Tomcat image with a compatible JDK
 FROM tomcat:10.1-jdk21-temurin
 
 # Remove default Tomcat webapps
