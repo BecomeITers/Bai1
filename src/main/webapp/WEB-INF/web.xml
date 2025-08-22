@@ -6,11 +6,11 @@
          version="5.0">
     
     <servlet>
-        <servlet-name>EmailListServlet</servlet-name>
+        <servlet-name>Servlet</servlet-name>
         <servlet-class>Demo.Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>EmailListServlet</servlet-name>
+        <servlet-name>Servlet</servlet-name>
         <url-pattern>/emaillist</url-pattern>
     </servlet-mapping>
     
