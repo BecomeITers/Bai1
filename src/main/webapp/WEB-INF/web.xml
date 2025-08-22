@@ -4,10 +4,22 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                              https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-    
+
+    <!-- Trang mặc định -->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
+
+    <!-- KHAI BÁO SERVLET VÀ MAPPING -->
+    <servlet>
+        <servlet-name>EmailListServlet</servlet-name>
+        <servlet-class>Demo.Servlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EmailListServlet</servlet-name>
+        <url-pattern>/emaillist</url-pattern>
+    </servlet-mapping>
 </web-app>
